@@ -5,10 +5,12 @@ module.exports = {
   entry: "./src/app.ts", // tell webpack where our root file is relevent to this config file.
   output: {
     // tell webpack where we want our final javascript file to end up and what the name should be.
-    filename: "bundle.[contenthash].js",
+    // filename: "bundle.[contenthash].js", // you can create unique names using [contenthash]
+    filename: "bundle.js",
     path: path.resolve(__dirname, "dist"), //the path is NOT relevent to this config file and must use your root directory for directions.
+    publicPath: 'dist', // this is the public path. This is needed for the webpack-dev-server
   },
-  devtools: "inline-source-map", // tell webpack that we are making source maps already
+  devtool: "inline-source-map", // tell webpack that we are making source maps already
   module: {
     // see webpack module property for more information.
     rules: [
