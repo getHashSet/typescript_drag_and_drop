@@ -1,0 +1,1 @@
+# NON module typescript template engine
