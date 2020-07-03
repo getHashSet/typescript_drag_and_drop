@@ -1,7 +1,10 @@
+// README: webpack does not look for this by default
+
 const path = require("path"); // this is built into NodeJS
+const CleanPlugin = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: 'development', // tell webpack this is a local build. This will skip steps and make the code easier to debug.
+  mode: "production", // tell webpack this is a a production build.
   // this is how you export in NodeJS
   entry: "./src/app.ts", // tell webpack where our root file is relevent to this config file.
   output: {
@@ -9,9 +12,8 @@ module.exports = {
     // filename: "bundle.[contenthash].js", // you can create unique names using [contenthash]
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"), //the path is NOT relevent to this config file and must use your root directory for directions.
-    publicPath: 'dist', // this is the public path. This is needed for the webpack-dev-server. This is for local only and has no affect on production code.
   },
-  devtool: "inline-source-map", // tell webpack that we are making source maps already
+  devtool: "none", // make sure there are no generated dev tools
   module: {
     // see webpack module property for more information.
     rules: [
@@ -25,4 +27,8 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"], // these are the accepted types of files after webpack builds a bundle.
   },
+  plugins: [
+    // these are extensions of webpack. This only matters in produciton.
+    new CleanPlugin.CleanWebpackPlugin(), // this will clear the output folder keywords: delete remove clear
+  ],
 };
